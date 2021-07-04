@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://cdn.datatables.net/1.10.25/css/dataTables.bootstrap4.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
+<script
+	src="https://cdn.datatables.net/1.10.25/js/dataTables.bootstrap4.min.js"></script>
+<title>学生管理システム</title>
+<style type="text/css">
+#studentTable caption {
+	caption-side: top;
+	text-align: center;
+	color: #000000;
+	font-weight: bold;
+}
+
+.pageTitle {
+	font-size: 30px;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-light bg-light p-4">
+		<p class="navbar-brand pageTitle" th:text="${userName}"></p>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-auto">
+				<!-- <li class="nav-item active"><a class="nav-link" href="#">Home
+						<span class="sr-only">(current)</span>
+				</a></li> -->
+				<li class="nav-item"><a class="nav-link disabled" href="#"
+					aria-disabled="true">Link</a></li>
+				<!-- <li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"> Dropdown </a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<a class="dropdown-item" href="#">Action</a> <a
+							class="dropdown-item" href="#">Another action</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item" href="#">Something else here</a>
+					</div></li> -->
+				<li class="nav-item"><a class="nav-link disabled" href="#"
+					tabindex="-1" aria-disabled="true">Disabled</a></li>
+			</ul>
+			<form class="form-inline my-2 my-lg-0" action="/logoutAction"
+				method="post">
+				<button class="btn btn-outline-danger my-2 my-sm-0" type="submit">LogOut</button>
+			</form>
+		</div>
+	</nav>
+
+	<div class="container mt-4">
+		<table class="table" id="studentTable">
+			<caption class="pb-3">プログラミングコースに参加希望の学生一覧</caption>
+			<thead>
+				<tr>
+					<th scope="col">学生ID</th>
+					<th scope="col">学生名（英語）</th>
+					<th scope="col">学生名（フリガナ）</th>
+					<th scope="col">国籍</th>
+					<th scope="col">JLPT</th>
+					<th scope="col">性別</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="student :${studentList}">
+					<td th:utext="${student.studentId}"></td>
+					<td th:utext="${student.studentNameEng}"></td>
+					<td th:utext="${student.studentNameFurigana}"></td>
+					<td th:utext="${student.studentCountry}"></td>
+					<td th:utext="${student.studentJlptLevel}"></td>
+					<td th:text="${student.studentGender}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#studentTable').DataTable();
+		});
+	</script>
+</body>
+</html>
